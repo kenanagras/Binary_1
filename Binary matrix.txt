@@ -1,0 +1,20 @@
+Library (Tidyverse)
+Library (dplyr)
+Library (excel)
+Library (Tidyr)
+Library (Tidyselect)
+
+read.excel(input you file)
+
+binaryCore_B1_I <- data.frame(ID = Core_B1_I[[1]])
+for (col in names(Core_B1_I)[-1]) {
+  # Create binary columns based on the condition
+  unique_values <- unique(Core_B1_I[[col]])
+  
+  for (value in unique_values) {
+    # Create a new binary column for each unique value
+    binaryCore_B1_I[[paste(col, value, sep = "_")]] <- ifelse(Core_B1_I[[col]] == value, 1, 0)
+  }
+}
+print(binaryCore_B1_I)
+write.csv(binaryCore_B1_I, "Output.csv", row.names = FALSE)
